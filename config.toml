@@ -1,0 +1,32 @@
+baseURL = 'https://tonvanbart.github.io/hugo-demo/'
+languageCode = 'en-us'
+title = 'Hugo Demo'
+
+# Build drafts is handled via -D flag on `hugo server`, not here.
+
+[params]
+  description = "Demo: Hugo + GitHub Actions + GitHub Pages"
+  # Replace with your deployed Google Apps Script Web App URL, e.g.
+  # https://script.google.com/macros/s/AKfycb.../exec
+  # Leave empty to run the Signup page in "no backend configured" mode.
+  formEndpoint = ""
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 10
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 20
+
+[[menu.main]]
+  name = "News"
+  url = "/news/"
+  weight = 30
+
+[[menu.main]]
+  name = "Signup"
+  url = "/signup/"
+  weight = 40

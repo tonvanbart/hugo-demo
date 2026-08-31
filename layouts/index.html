@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="p-4 p-md-5 mb-4 bg-light rounded-3">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Static content</h5>
+        <p class="card-text">Pages and posts are plain Markdown, built into static HTML by Hugo.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Automated deploys</h5>
+        <p class="card-text">A GitHub Actions workflow builds and publishes the site on every push.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Serverless form</h5>
+        <p class="card-text">The <a href="{{ "/signup/" | relURL }}">Signup</a> page posts to a small
+          Google Apps Script backend, no server required.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

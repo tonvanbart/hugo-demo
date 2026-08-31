@@ -1,0 +1,75 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<p>Sign up below. Submissions are sent to a small serverless function
+  (Google Apps Script) which appends each entry to a Google Sheet.</p>
+
+<form id="signup-form" class="row g-3 needs-validation" novalidate style="max-width: 32rem;">
+  <div class="col-12">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+    <div class="invalid-feedback">Please enter your name.</div>
+  </div>
+  <div class="col-12">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+    <div class="invalid-feedback">Please enter a valid email address.</div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </div>
+  <div class="col-12">
+    <div id="signup-status" class="mt-2"></div>
+  </div>
+</form>
+
+<script>
+(function () {
+  var endpoint = {{ .Site.Params.formEndpoint }};
+  var form = document.getElementById("signup-form");
+  var status = document.getElementById("signup-status");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+    form.classList.add("was-validated");
+
+    if (!endpoint) {
+      status.innerHTML = '<div class="alert alert-warning" role="alert">' +
+        'No form backend configured yet (Site.Params.formEndpoint is empty). ' +
+        'In a real deploy this would POST to a Google Apps Script Web App URL.' +
+        '</div>';
+      return;
+    }
+
+    var data = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value
+    };
+
+    status.innerHTML = '<div class="alert alert-info" role="alert">Sending&hellip;</div>';
+
+    fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then(function (response) {
+        if (!response.ok) { throw new Error("Request failed: " + response.status); }
+        status.innerHTML = '<div class="alert alert-success" role="alert">Thanks, ' +
+          data.name + '! You are signed up.</div>';
+        form.reset();
+        form.classList.remove("was-validated");
+      })
+      .catch(function (err) {
+        status.innerHTML = '<div class="alert alert-danger" role="alert">' +
+          'Something went wrong: ' + err.message + '</div>';
+      });
+  });
+})();
+</script>
+{{ end }}

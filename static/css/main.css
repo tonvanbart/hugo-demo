@@ -1,0 +1,12 @@
+/* Small local overrides on top of vendored Bootstrap. */
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+/* Footer content itself uses flexbox for centering, independent of Bootstrap's utility classes. */
+footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

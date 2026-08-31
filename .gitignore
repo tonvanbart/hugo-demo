@@ -1,0 +1,4 @@
+# Hugo build output — the Actions workflow builds this fresh, don't commit it.
+/public/
+/resources/_gen/
+.hugo_build.lock
