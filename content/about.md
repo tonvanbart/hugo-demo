@@ -1,17 +1,18 @@
 ---
-title: "About"
+title: "Over"
 ---
 
-## About this demo
+## Over deze demo
 
-This site exists to demonstrate a simple website build and hosting pipeline:
+Deze site laat een eenvoudige werkwijze zien voor het bouwen en hosten van een website:
 
-1. Write content in Markdown.
-2. Use `hugo server -D` to see your changes locally.
-3. Once satisfied with your changes, commit and push to Github.
-4. A GitHub Actions workflow builds and publishes the site to GitHub Pages
-   on every push to `main`.
+1. Schrijf de inhoud in Markdown.
+2. Bekijk je wijzigingen lokaal met `hugo server -D`.
+3. Ben je tevreden met je wijzigingen? Commit en push ze dan naar GitHub.
+4. Bij elke push naar `main` bouwt een GitHub Actions-workflow de site en
+   publiceert die op GitHub Pages.
 
-There's also a **Signup** page demonstrating how a static site can talk to a
-small serverless backend ( in this case a Google Apps Script writing to a Google Sheet)
-for simple form handling without custom server code.
+Er is ook een pagina **Aanmelden**. Die laat zien hoe een statische site kan
+samenwerken met een kleine serverless backend (in dit geval een Google Apps Script
+dat naar een Google Sheet schrijft), zodat je eenvoudige formulieren kunt verwerken
+zonder eigen servercode.

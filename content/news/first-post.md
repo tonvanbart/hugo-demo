@@ -1,10 +1,10 @@
 ---
-title: "Project kicked off"
+title: "Project van start gegaan"
 date: 2026-08-01
-summary: "The hugo-demo project is up and running."
+summary: "Het project hugo-demo is opgezet en draait."
 ---
 
-We've started this demo project to show how easy it is to host a Hugo site
-on GitHub Pages, deployed via GitHub Actions.
+We zijn dit demoproject gestart om te laten zien hoe eenvoudig het is om een
+Hugo-site op GitHub Pages te hosten, met publicatie via GitHub Actions.
 
-More updates to follow as the site grows.
+Naarmate de site groeit, volgen er meer updates.

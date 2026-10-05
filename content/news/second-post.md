@@ -1,9 +1,9 @@
 ---
-title: "Signup page added"
+title: "Aanmeldpagina toegevoegd"
 date: 2026-08-15
-summary: "A signup form was added, backed by a small serverless function."
+summary: "Er is een aanmeldformulier toegevoegd, met een kleine serverless functie als backend."
 ---
 
-The site now includes a **Signup** page. Submissions are sent to a small
-serverless function (Google Apps Script) which writes each entry to a
-Google Sheet — no traditional backend server required.
+De site heeft nu een pagina **Aanmelden**. Aanmeldingen worden naar een kleine
+serverless functie (Google Apps Script) gestuurd, die elke inzending in een
+Google Sheet opslaat. Een traditionele backendserver is dus niet nodig.

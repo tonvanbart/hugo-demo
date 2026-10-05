@@ -2,17 +2,13 @@
 <h1>{{ .Title }}</h1>
 {{ .Content }}
 
-<div class="row row-cols-1 row-cols-md-2 g-4 mt-2">
-  {{ range .Pages }}
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h5>
-        {{ if .Date }}<h6 class="card-subtitle mb-2 text-muted">{{ .Date.Format "2 January 2006" }}</h6>{{ end }}
-        <p class="card-text">{{ .Params.summary | default (.Summary) }}</p>
-      </div>
-    </div>
-  </div>
+<div class="mt-4">
+  {{ range .Pages.ByDate.Reverse }}
+  <article class="py-4 border-bottom">
+    <h2 class="h4 mb-1"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ if .Date }}<p class="text-muted small mb-2">{{ .Date | time.Format ":date_long" }}</p>{{ end }}
+    <p class="mb-0">{{ .Params.summary | default (.Summary) }}</p>
+  </article>
   {{ end }}
 </div>
 {{ end }}

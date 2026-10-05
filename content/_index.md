@@ -2,10 +2,11 @@
 title: "Home"
 ---
 
-## Welcome
+## Welkom
 
-This is a small demo site showing how to build a [Hugo](https://gohugo.io/) site
-and host it on **GitHub Pages**, deployed automatically with **GitHub Actions**.
+Dit is een kleine demosite die laat zien hoe je een [Hugo](https://gohugo.io/)-site
+bouwt en host op **GitHub Pages**, automatisch gepubliceerd met **GitHub Actions**.
 
-It uses a hand-written, minimal theme and a locally vendored copy of Bootstrap
-for a responsive layout. There is no CDN dependency, no build tooling, and no JavaScript framework.
+De site gebruikt een eenvoudig, zelfgeschreven thema en een lokaal meegeleverde kopie
+van Bootstrap voor een responsieve opmaak. Er is geen afhankelijkheid van een CDN,
+geen buildtooling en geen JavaScript-framework.

@@ -1,5 +1,5 @@
 ---
-title: "News"
+title: "Nieuws"
 ---
 
-Latest updates below.
+Hieronder vind je het laatste nieuws.

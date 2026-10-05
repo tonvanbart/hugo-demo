@@ -1,5 +1,5 @@
 ---
-title: '{{ replace .File.ContentBaseName "-" " " | title }}'
+title: '{{ .File.ContentBaseName | humanize }}'
 date: {{ .Date }}
 draft: true
 ---

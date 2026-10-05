@@ -1,7 +1,7 @@
 ---
-title: 'Artikel Toegevoegd'
+title: 'Artikel toegevoegd'
 date: 2026-10-02T22:43:11+02:00
 draft: false
 ---
-Een nieuw artikel toegevoegd met `hugo new news/artikel-toegevoegd.md`.
-de front matter is automatisch toegevoegd en ingevuld.
+Dit artikel is toegevoegd met `hugo new news/artikel-toegevoegd.md`.
+De front matter is automatisch aangemaakt en ingevuld.

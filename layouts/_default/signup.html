@@ -1,21 +1,21 @@
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
-<p>Sign up below. Submissions are sent to a small serverless function
-  (Google Apps Script) which appends each entry to a Google Sheet.</p>
+<p>Meld je hieronder aan. Aanmeldingen worden naar een kleine serverless functie
+  (Google Apps Script) gestuurd, die elke inzending aan een Google Sheet toevoegt.</p>
 
 <form id="signup-form" class="row g-3 needs-validation" novalidate style="max-width: 32rem;">
   <div class="col-12">
-    <label for="name" class="form-label">Name</label>
+    <label for="name" class="form-label">Naam</label>
     <input type="text" class="form-control" id="name" name="name" required>
-    <div class="invalid-feedback">Please enter your name.</div>
+    <div class="invalid-feedback">Vul je naam in.</div>
   </div>
   <div class="col-12">
-    <label for="email" class="form-label">Email</label>
+    <label for="email" class="form-label">E-mailadres</label>
     <input type="email" class="form-control" id="email" name="email" required>
-    <div class="invalid-feedback">Please enter a valid email address.</div>
+    <div class="invalid-feedback">Vul een geldig e-mailadres in.</div>
   </div>
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign up</button>
+    <button type="submit" class="btn btn-primary">Aanmelden</button>
   </div>
   <div class="col-12">
     <div id="signup-status" class="mt-2"></div>
@@ -27,6 +27,15 @@
   var endpoint = {{ .Site.Params.formEndpoint }};
   var form = document.getElementById("signup-form");
   var status = document.getElementById("signup-status");
+
+  // Uses textContent so user input (e.g. the name) is never parsed as HTML.
+  function showAlert(type, message) {
+    var alert = document.createElement("div");
+    alert.className = "alert alert-" + type;
+    alert.setAttribute("role", "alert");
+    alert.textContent = message;
+    status.replaceChildren(alert);
+  }
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -40,8 +49,9 @@
 
     if (!endpoint) {
       status.innerHTML = '<div class="alert alert-warning" role="alert">' +
-        'No form backend configured yet (Site.Params.formEndpoint is empty). ' +
-        'In a real deploy this would POST to a Google Apps Script Web App URL.' +
+        'Er is nog geen formulierbackend geconfigureerd (Site.Params.formEndpoint is leeg). ' +
+        'In een echte deployment zou het formulier de gegevens via een POST naar de URL ' +
+        'van een Google Apps Script-webapp sturen.' +
         '</div>';
       return;
     }
@@ -51,23 +61,24 @@
       email: document.getElementById("email").value
     };
 
-    status.innerHTML = '<div class="alert alert-info" role="alert">Sending&hellip;</div>';
+    status.innerHTML = '<div class="alert alert-info" role="alert">Bezig met verzenden&hellip;</div>';
 
+    // text/plain keeps this a CORS "simple request": a JSON content type would
+    // trigger an OPTIONS preflight, which Apps Script doesn't answer. The body
+    // is still JSON; the script parses e.postData.contents as before.
     fetch(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(data)
     })
       .then(function (response) {
-        if (!response.ok) { throw new Error("Request failed: " + response.status); }
-        status.innerHTML = '<div class="alert alert-success" role="alert">Thanks, ' +
-          data.name + '! You are signed up.</div>';
+        if (!response.ok) { throw new Error("Verzoek mislukt: " + response.status); }
+        showAlert("success", "Bedankt, " + data.name + "! Je bent aangemeld.");
         form.reset();
         form.classList.remove("was-validated");
       })
       .catch(function (err) {
-        status.innerHTML = '<div class="alert alert-danger" role="alert">' +
-          'Something went wrong: ' + err.message + '</div>';
+        showAlert("danger", "Er is iets misgegaan: " + err.message);
       });
   });
 })();

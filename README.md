@@ -1,39 +1,41 @@
 # hugo-demo
 
-A minimal demo project: a [Hugo](https://gohugo.io/) site, hand-written theme,
-locally vendored Bootstrap for a responsive layout, deployed automatically to
-**GitHub Pages** via **GitHub Actions**.
+Een minimaal demoproject: een [Hugo](https://gohugo.io/)-site met een
+zelfgeschreven thema en een lokaal meegeleverde kopie van Bootstrap voor een
+responsieve opmaak. De site wordt via **GitHub Actions** automatisch
+gepubliceerd op **GitHub Pages**.
 
-## Structure
+## Structuur
 
-- `content/` — Markdown content: Home, About, News (list + posts), Signup.
-- `layouts/` — Hand-written templates. No external theme.
-- `static/css`, `static/js` — Vendored Bootstrap 5 (CSS + JS bundle), copied
-  from the npm package, no CDN dependency.
-- `.github/workflows/hugo.yaml` — Builds the site with Hugo and publishes it
-  to GitHub Pages on every push to `main`.
+- `content/` — inhoud in Markdown: Home, Over, Nieuws (overzicht en berichten)
+  en Aanmelden.
+- `layouts/` — zelfgeschreven templates, zonder extern thema.
+- `static/css`, `static/js` — meegeleverde Bootstrap 5 (CSS en JS-bundel),
+  gekopieerd uit het npm-pakket, zonder afhankelijkheid van een CDN.
+- `.github/workflows/hugo.yaml` — bouwt de site met Hugo en publiceert die bij
+  elke push naar `main` op GitHub Pages.
 
-## Local development
+## Lokaal ontwikkelen
 
 ```sh
 hugo server -D
 ```
 
-Then open <http://localhost:1313/>. `-D` includes draft content
-(`draft: true` in front matter), which is useful while writing new posts.
+Open daarna <http://localhost:1313/>. Met `-D` worden ook concepten
+(`draft: true` in de front matter) getoond. Deze verschijnen niet op de produktie site.
 
-To produce a production build locally (same as what CI does):
+Zo maak je lokaal een produktiebuild (hetzelfde als wat CI doet):
 
 ```sh
 hugo --minify
 ```
 
-Output goes to `public/` (git-ignored).
+De uitvoer komt in `public/` terecht (en wordt door git genegeerd).
 
-## First-time GitHub setup
+## Eenmalige installatie op GitHub
 
-1. Create the repo on GitHub (e.g. `tonvanbart/hugo-demo`), then push this
-   project:
+1. Maak de repository aan op GitHub (bijvoorbeeld `tonvanbart/hugo-demo`) en
+   push dit project:
 
    ```sh
    cd hugo-demo
@@ -45,33 +47,36 @@ Output goes to `public/` (git-ignored).
    git push -u origin main
    ```
 
-2. In the GitHub repo, go to **Settings → Pages** and under "Build and
-   deployment", set **Source** to **GitHub Actions**. (This is a one-time
-   manual step — Pages doesn't build with Actions until you tell it to.)
+2. Ga in de repository op GitHub naar **Settings → Pages** en zet onder "Build
+   and deployment" de **Source** op **GitHub Actions**. (Dit is een eenmalige
+   handmatige stap: Pages bouwt pas met Actions als je dat hebt ingesteld.)
 
-3. Push to `main` (or re-run the workflow manually from the **Actions** tab)
-   and the site will build and deploy. The URL will be
+3. Push naar `main` (of start de workflow handmatig opnieuw vanaf het tabblad
+   **Actions**). De site wordt dan gebouwd en gepubliceerd op
    `https://tonvanbart.github.io/hugo-demo/`.
 
-The workflow asks GitHub Pages for the correct base URL at build time
-(via `actions/configure-pages`), so it doesn't matter if you rename the repo
-or fork it — you don't need to hand-edit `baseURL` in `hugo.toml` for it to
-work in CI. That value in `hugo.toml` is only used for local reference /
-`hugo server`.
+De workflow vraagt tijdens de build de juiste basis-URL op bij GitHub Pages
+(via `actions/configure-pages`). Het maakt dus niet uit of je de repository
+hernoemt of forkt: je hoeft `baseURL` in `hugo.toml` niet handmatig aan te
+passen om het in CI te laten werken. Die waarde in `hugo.toml` dient alleen als
+lokale referentie en voor `hugo server`.
 
-## Signup page / serverless form backend
+## Aanmeldpagina en serverless formulierbackend
 
-The **Signup** page (`content/signup.md`, `layouts/_default/signup.html`)
-posts JSON to whatever URL is set in `params.formEndpoint` in `hugo.toml`.
-By default that's empty, so the form runs in a harmless "no backend
-configured" mode — it validates input but shows a warning instead of
-actually submitting, which is fine for exploring the site without any setup.
+De pagina **Aanmelden** (`content/signup.md`, `layouts/_default/signup.html`)
+stuurt JSON naar de URL die in `params.formEndpoint` in `hugo.toml` staat.
+Standaard is die leeg. Het formulier werkt dan in een "demo" modus zonder
+backend: de invoer wordt gecontroleerd, maar in plaats van te verzenden toont
+het formulier een waarschuwing. Zo kun je de site zonder enige configuratie
+verkennen.
 
-To wire it up to a real backend using **Google Apps Script + Google Sheets**:
+Zo koppel je het formulier aan een echte backend met **Google Apps Script en
+Google Sheets**:
 
-1. Create a new Google Sheet. Add a header row, e.g. `Timestamp | Name | Email`.
-2. In the Sheet, go to **Extensions → Apps Script**.
-3. Replace the default code with something like:
+1. Maak een nieuwe Google Sheet aan. Voeg een kopregel toe, bijvoorbeeld
+   `Tijdstip | Naam | E-mail`.
+2. Ga in de Sheet naar **Extensies → Apps Script**.
+3. Vervang de standaardcode door iets als:
 
    ```javascript
    function doPost(e) {
@@ -84,18 +89,16 @@ To wire it up to a real backend using **Google Apps Script + Google Sheets**:
    }
    ```
 
-4. Click **Deploy → New deployment**, type **Web app**, set "Who has access"
-   to **Anyone**, and deploy. Copy the generated `/exec` URL.
-5. Put that URL in `hugo.toml`:
+4. Klik op **Implementeren → Nieuwe implementatie**, kies het type
+   **Web-app**, zet "Wie heeft toegang" op **Iedereen** en implementeer.
+   Kopieer de gegenereerde `/exec`-URL.
+5. Zet die URL in `hugo.toml`:
 
    ```toml
    [params]
      formEndpoint = "https://script.google.com/macros/s/XXXXXXXX/exec"
    ```
 
-6. Rebuild / push. Submissions from the Signup page will now land as new
-   rows in the Sheet.
+6. Bouw de site opnieuw of push je wijzigingen. Inzendingen vanaf de pagina
+   Aanmelden komen nu als nieuwe rijen in de Sheet terecht.
 
-If venue wifi is unreliable during a live demo, it's safe to leave
-`formEndpoint` empty and instead walk through the Apps Script code and a
-Sheet with some rows already in it from an earlier test run.
