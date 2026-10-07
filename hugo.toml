@@ -11,6 +11,8 @@ title = 'Hugo Demo'
   # https://script.google.com/macros/s/AKfycb.../exec
   # Leave empty to run the Signup page in "no backend configured" mode.
   formEndpoint = ""
+  # Formspree endpoint used by the /signup-formspree/ page.
+  formspreeEndpoint = "https://formspree.io/f/xaeqeeke"
 
 [[menu.main]]
   name = "Home"
@@ -29,5 +31,5 @@ title = 'Hugo Demo'
 
 [[menu.main]]
   name = "Aanmelden"
-  url = "/signup/"
+  url = "/signup-formspree/"
   weight = 40
