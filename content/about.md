@@ -13,6 +13,5 @@ Deze site laat een eenvoudige werkwijze zien voor het bouwen en hosten van een w
    publiceert die op GitHub Pages.
 
 Er is ook een pagina **Aanmelden**. Die laat zien hoe een statische site kan
-samenwerken met een kleine serverless backend (in dit geval een Google Apps Script
-dat naar een Google Sheet schrijft), zodat je eenvoudige formulieren kunt verwerken
-zonder eigen servercode.
+samenwerken met een kleine serverless backend (in dit geval een form dat gebruik maakt van FormSpree),
+ zodat je eenvoudige formulieren kunt verwerken zonder eigen servercode.
