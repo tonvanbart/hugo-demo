@@ -2,7 +2,7 @@
 title: "Over"
 ---
 
-## Over deze demo is nieuw
+## Over deze demo
 
 Deze site laat een eenvoudige werkwijze zien voor het met Hugo bouwen en op Github hosten van een website:
 
