@@ -2,11 +2,11 @@
 title: "Over"
 ---
 
-## Over deze demo
+## Over dezevoorbeeld demo
 
 Deze site laat een eenvoudige werkwijze zien voor het met Hugo bouwen en op Github hosten van een website:
 
-1. Schrijf de inhoud in Markdown.
+1. Schrijf de inhoud in Markdown. Maak de aanpassing.
 2. Bekijk je wijzigingen lokaal met `hugo server -D`.
 3. Ben je tevreden met je wijzigingen? Commit en push ze dan naar GitHub.
 4. Bij elke push naar `main` bouwt een GitHub Actions-workflow de site en
