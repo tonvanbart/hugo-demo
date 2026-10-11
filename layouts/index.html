@@ -5,30 +5,23 @@
 </div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
+  {{ range .Site.Data.home_cards }}
+  {{ $card := . }}
   <div class="col">
     <div class="card h-100">
       <div class="card-body">
-        <h5 class="card-title">Statische inhoud</h5>
-        <p class="card-text">Pagina's en berichten zijn gewone Markdown, die Hugo omzet in statische HTML.</p>
+        <h5 class="card-title">{{ .title }}</h5>
+        {{ with .image }}
+        <img src="{{ . | relURL }}" alt="{{ $card.imageAlt }}" class="img-fluid rounded mb-2">
+        {{ end }}
+        {{ if .text }}
+        <p class="card-text">{{ .text }}</p>
+        {{ else }}
+        <p class="card-text">{{ .textBefore }}<a href="{{ .linkURL | relURL }}">{{ .linkText }}</a>{{ .textAfter }}</p>
+        {{ end }}
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Automatische publicatie</h5>
-        <p class="card-text">Een GitHub Actions-workflow bouwt en publiceert de site bij elke push.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Serverless formulier</h5>
-        <p class="card-text">De pagina <a href="{{ "/signup-formspree/" | relURL }}">Aanmelden</a> stuurt gegevens naar
-          Formspree, een externe formulierdienst. Er is geen eigen server nodig.</p>
-      </div>
-    </div>
-  </div>
+  {{ end }}
 </div>
 {{ end }}

@@ -1,0 +1,5 @@
+{{- $src := .Destination -}}
+{{- if not (urls.Parse $src).IsAbs -}}
+  {{- $src = $src | relURL -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>
