@@ -21,3 +21,5 @@ Op deze manier kun je eenvoudige formulieren verwerken zonder eigen servercode.
 
 De hele website code, inclusief theme en workflow is open source en te vinden
 op GitHub onder [github.com/tonvanbart/hugo-demo](https://github.com/tonvanbart/hugo-demo).
+
+Alle code is vrijgegeven onder de "unlicense" licentie.
